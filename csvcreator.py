@@ -1,5 +1,6 @@
 import csv
 import datetime
+import os
 
 generalCSV = open('reservations.csv')
 singlelineCSV = open('singleline.csv', 'wt')
@@ -23,10 +24,9 @@ try:
                 #fila contenente una materia e un professore
                 prevrow[-1] = prevrow[-1] + " " + smallrow[0]
                 professor = smallrow[1]
-                print professor
+                print(professor)
                 prevrow.append(professor)
             print("riga corta, metto nella riga precedente")
-            #pr
             #vado avanti di una riga iterando il ciclo for
             j += 1  #ma mi segno che devo incollare tutto una riga piu indietro
         else:
@@ -39,7 +39,18 @@ try:
 finally:
     generalCSV.close()
 
-source = open('singleline.csv')
+
+with open('singleline.csv', 'r') as fdin, open('out.csv', 'wt') as fdout:
+    for line in csv.reader(fdin):
+        # insert into each row by index
+        if len(line) < 13:
+            line.insert(11, '')
+        # and write
+        csv.writer(fdout).writerow(line)
+
+os.remove("singleline.csv")
+
+source = open('out.csv')
 result = open('result.csv', 'wt')
 
 try:
@@ -85,3 +96,14 @@ try:
 finally:
     source.close()
     result.close()
+
+with open('result.csv', 'r') as fdin, open('final.csv', 'wt') as fdout:
+    for line in csv.reader(fdin):
+        # insert into each row by
+        print(len(line))
+        #if len(line) < 13:
+            #line.insert(11, '')
+        # and write
+        csv.writer(fdout).writerow(line)
+
+#os.remove("singleline.csv")
