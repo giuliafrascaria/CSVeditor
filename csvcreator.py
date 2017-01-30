@@ -97,13 +97,13 @@ finally:
     source.close()
     result.close()
 
-with open('result.csv', 'r') as fdin, open('final.csv', 'wt') as fdout:
-    for line in csv.reader(fdin):
-        # insert into each row by
-        print(len(line))
-        #if len(line) < 13:
-            #line.insert(11, '')
-        # and write
-        csv.writer(fdout).writerow(line)
+# with open('result.csv', 'r') as fdin, open('final.csv', 'wt') as fdout:
+#     for line in csv.reader(fdin):
+#         # insert into each row by
+#         if len(line) == 5:
+#             print(line)
+#             #line.insert(11, '')
+#         # and write
+#         csv.writer(fdout).writerow(line)
 
-#os.remove("singleline.csv")
+os.remove("out.csv")
