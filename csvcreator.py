@@ -12,7 +12,7 @@ try:
     j = 1
     for i in range(2, len(dataList)):
         row = dataList[i]
-        if len(row) <= 11:
+        if len(row) <= 10:
             print(str(j) + "j")
             prevrow = dataList[i - j]
             smallrow = dataList[i]
@@ -23,11 +23,11 @@ try:
             j += 1  #ma mi segno che devo incollare tutto una riga piu indietro
         else:
             csvWriter.writerow(dataList[i - j])
+            print("riga lunga, scrivo")
             j = 1
             #print(row)
             #copio la riga nel csv corretto
             #print("row normale")
-            csvWriter.writerow(dataList[i])
 finally:
     generalCSV.close()
 
