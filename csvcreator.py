@@ -16,7 +16,15 @@ try:
             print(str(j) + "j")
             prevrow = dataList[i - j]
             smallrow = dataList[i]
-            prevrow.extend(smallrow)
+            if len(smallrow) == 1:
+                #fila contenente solo una materia, la aggiungo all'ultima cella
+                prevrow[-1] = prevrow[-1] + " " + smallrow[0]
+            else:
+                #fila contenente una materia e un professore
+                prevrow[-1] = prevrow[-1] + " " + smallrow[0]
+                professor = smallrow[1]
+                print professor
+                prevrow.append(professor)
             print("riga corta, metto nella riga precedente")
             #pr
             #vado avanti di una riga iterando il ciclo for
