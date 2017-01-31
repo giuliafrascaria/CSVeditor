@@ -40,33 +40,69 @@ End Sub
 
 
 
+
+sub degreeTable()
+	rem peh
+end sub
+
+
+sub degreechooser
+ Dim s As String
+ s = InputBox("Scegli il corso di laurea " & _
+         vbCrLf & vbTab & "1 - Ingegneria Informatica" & vbCrLf & _
+         vbCrLf & vbTab & "2 - Ingegneria Gestionale" & vbCrLf & _
+         vbCrLf & vbTab & "3 - Ingegneria Edile" & _
+         vbCrLf & vbTab & "4 - Ingegneria Di internet" & _
+         vbCrLf & vbTab & "5 - Ingegneria dell'edilizia" & _
+         vbCrLf & vbTab & "6 - Ingegneria Elettronica" & _
+         vbCrLf & vbTab & "7 - Ingegneria di semone", "Option Chooser")
+ Select Case s
+     Case "1"
+         FolderChooser = "C:\Folder1"
+     Case "2"
+         FolderChooser = "C:\Folder1"
+     Case "3"
+         FolderChooser = "C:\Folder1"
+     Case "4"
+     	FolderChooser = "C:\Folder1"
+     Case "5"
+     	FolderChooser = "C:\Folder1"
+     Case "6"
+     	FolderChooser = "C:\Folder1"
+     Case "7"
+     	FolderChooser = "C:\Folder1"
+     Case Else
+         FolderChooser = "*nothing selected*"
+ End Select
+end sub
+
+
 sub tableCreator
-rem ----------------------------------------------------------------------
-rem define variables
-dim document   as object
-dim dispatcher as object
-rem ----------------------------------------------------------------------
-rem get access to the document
-document   = ThisComponent.CurrentController.Frame
-dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+	rem ----------------------------------------------------------------------
+	rem define variables
+	dim document   as object
+	dim dispatcher as object
+	rem ----------------------------------------------------------------------
+	rem get access to the document
+	document   = ThisComponent.CurrentController.Frame
+	dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
 
-rem ----------------------------------------------------------------------
-dim args1(0) as new com.sun.star.beans.PropertyValue
-args1(0).Name = "ToPoint"
-args1(0).Value = "$A$1"
+	rem ----------------------------------------------------------------------
+	dim args1(0) as new com.sun.star.beans.PropertyValue
+	args1(0).Name = "ToPoint"
+	args1(0).Value = "$A$1"
 
-dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args1())
+	dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args1())
 
-rem ----------------------------------------------------------------------
-dispatcher.executeDispatch(document, ".uno:Paste", "", 0, Array())
+	rem ----------------------------------------------------------------------
+	dispatcher.executeDispatch(document, ".uno:Paste", "", 0, Array())
 
-rem ----------------------------------------------------------------------
-dim args3(0) as new com.sun.star.beans.PropertyValue
-args3(0).Name = "ToPoint"
-args3(0).Value = "$D$16"
+	rem ----------------------------------------------------------------------
+	dim args3(0) as new com.sun.star.beans.PropertyValue
+	args3(0).Name = "ToPoint"
+	args3(0).Value = "$D$16"
 
-dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args3())
-
+	dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args3())
 
 end sub
 
@@ -96,7 +132,7 @@ rem ----------------------------------------------------------------------
     xSheet = ThisComponent.Sheets(0)
     document   = ThisComponent.CurrentController.Frame
     dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
-    FilePath = "/home/dandi/PycharmProjects/CSVeditor/result.csv"
+    FilePath = "/home/giogge/PycharmProjects/TVschedule/result.csv"
     Open FilePath For Input As #1
 
 rem ----------------------------------------------------------------------
@@ -1129,24 +1165,6 @@ rem ----------------------------------------------------------------------
         End If
 
     Loop
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 End Sub
