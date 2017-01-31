@@ -1,3 +1,5 @@
+Option VBASupport 1
+
 Sub csvReader()
 
     dim preamble as String
@@ -48,14 +50,14 @@ end sub
 
 sub degreechooser
  Dim s As String
- s = InputBox("Scegli il corso di laurea " & _
-         vbCrLf & vbTab & "1 - Ingegneria Informatica" & vbCrLf & _
-         vbCrLf & vbTab & "2 - Ingegneria Gestionale" & vbCrLf & _
-         vbCrLf & vbTab & "3 - Ingegneria Edile" & _
-         vbCrLf & vbTab & "4 - Ingegneria Di internet" & _
-         vbCrLf & vbTab & "5 - Ingegneria dell'edilizia" & _
-         vbCrLf & vbTab & "6 - Ingegneria Elettronica" & _
-         vbCrLf & vbTab & "7 - Ingegneria di semone", "Option Chooser")
+ s = InputBox("Scegli il corso di laurea " & Chr(13) & _
+     vbCrLf & vbTab & "1 - Ingegneria Informatica" & Chr(13)  & _
+     vbCrLf & vbTab & "2 - Ingegneria Gestionale" & Chr(13) & _
+     vbCrLf & vbTab & "3 - Ingegneria Edile" & Chr(13) & Chr(10) & _
+     vbCrLf & vbTab & "4 - Ingegneria Di internet" & Chr(13) & Chr(10) & _
+     vbCrLf & vbTab & "5 - Ingegneria dell'edilizia" & Chr(13) & Chr(10) & _
+     vbCrLf & vbTab & "6 - Ingegneria Elettronica" & Chr(13) & Chr(10) & _
+     vbCrLf & vbTab & "7 - Ingegneria di semone", "Option Chooser")
  Select Case s
      Case "1"
          FolderChooser = "C:\Folder1"
