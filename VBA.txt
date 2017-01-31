@@ -121,6 +121,8 @@ rem ----------------------------------------------------------------------
 
 	call deleter
 	call test
+
+
     dim preamble as String
     dim myValue as String
     dim finalString as String
@@ -134,8 +136,9 @@ rem ----------------------------------------------------------------------
     xSheet = ThisComponent.Sheets(0)
     document   = ThisComponent.CurrentController.Frame
     dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
-    FilePath = "/home/giogge/PycharmProjects/TVschedule/result.csv"
+    FilePath = "/home/dandi/PycharmProjects/CSVeditor/result.csv"
     Open FilePath For Input As #1
+    Open FilePath For Input As #2
 
 rem ----------------------------------------------------------------------
 
@@ -370,6 +373,33 @@ rem ----------------------------------------------------------------------
                  xSheet.getCellByPosition(row, column).string = LineItems(2)
 
             End If
+
+    Loop
+
+    call minitable
+	call minitableBorder
+
+
+    Dim j As Integer
+    j = 0
+
+	dim materia as String
+	materia = "vuoto"
+
+    Do Until EOF(2)
+
+
+        Line Input #2, LineFromFile
+        LineItems = Split(LineFromFile, ",")
+		If LineItems(1) = finalString Then
+			If materia <> LineItems(2) Then
+	        	xSheet.getCellByPosition(1, 15 + j).string = LineItems(2)
+	        	xSheet.getCellByPosition(2, 15 + j).string = LineItems(3)
+	        	xSheet.getCellByPosition(3, 15 + j).string = LineItems(5)
+	        	j = j+1
+	        	materia = LineItems(2)
+        	End If
+		End If
 
     Loop
     rem MsgBox(finalString + " " + LineItems(1))
@@ -1010,12 +1040,24 @@ args2(0).Value = "Sigla"
 
 dispatcher.executeDispatch(document, ".uno:EnterString", "", 0, args2())
 
+dim args20(0) as new com.sun.star.beans.PropertyValue
+args20(0).Name = "ToPoint"
+args20(0).Value = "$C$14"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args20())
+
 rem ----------------------------------------------------------------------
 dim args3(0) as new com.sun.star.beans.PropertyValue
 args3(0).Name = "StringName"
 args3(0).Value = "Nome"
 
 dispatcher.executeDispatch(document, ".uno:EnterString", "", 0, args3())
+
+dim args21(0) as new com.sun.star.beans.PropertyValue
+args21(0).Name = "ToPoint"
+args21(0).Value = "$D$14"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args21())
 
 rem ----------------------------------------------------------------------
 dim args4(0) as new com.sun.star.beans.PropertyValue
@@ -1024,12 +1066,6 @@ args4(0).Value = "Docente"
 
 dispatcher.executeDispatch(document, ".uno:EnterString", "", 0, args4())
 
-rem ----------------------------------------------------------------------
-dim args5(0) as new com.sun.star.beans.PropertyValue
-args5(0).Name = "StringName"
-args5(0).Value = "Corso"
-
-dispatcher.executeDispatch(document, ".uno:EnterString", "", 0, args5())
 
 rem ----------------------------------------------------------------------
 dispatcher.executeDispatch(document, ".uno:JumpToNextCell", "", 0, Array())
@@ -1051,7 +1087,7 @@ dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
 rem ----------------------------------------------------------------------
 dim args1(0) as new com.sun.star.beans.PropertyValue
 args1(0).Name = "ToPoint"
-args1(0).Value = "$B$14:$E$14"
+args1(0).Value = "$B$14:$D$14"
 
 dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args1())
 
@@ -1088,85 +1124,3 @@ dispatcher.executeDispatch(document, ".uno:SetBorderStyle", "", 0, args2())
 
 
 end sub
-
-Sub CreateMiniTable
-
-	call minitable
-	call minitableBorder
-
-    dim document   as object
-    dim dispatcher as object
-    xSheet = ThisComponent.Sheets(0)
-    document   = ThisComponent.CurrentController.Frame
-    dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
-    FilePath = "/home/dandi/PycharmProjects/CSVeditor/result.csv"
-    Open FilePath For Input As #1
-
-rem ----------------------------------------------------------------------
-
-    Dim column as integer
-    Dim row As integer
-
-rem ----------------------------------------------------------------------
-
-    Dim i As Integer
-    i = 0
-
-
-    Do Until EOF(1)
-
-
-        Line Input #1, LineFromFile
-        LineItems = Split(LineFromFile, ",")
-
-
-
-        If LineItems(i) = "40" Then
-            row = "5"
-            column = "1"
-        End If
-        If LineItems(i) = "41" Then
-            row = "5"
-            column = "2"
-        End If
-        If LineItems(i) = "42" Then
-            row = "5"
-            column = "3"
-        End If
-        If LineItems(i) = "43" Then
-            row = "5"
-            column = "4"
-        End If
-        If LineItems(i) = "44" Then
-            row = "5"
-            column = "5"
-        End If
-        If LineItems(i) = "45" Then
-            row = "5"
-            column = "6"
-        End If
-        If LineItems(i) = "46" Then
-            row = "5"
-            column = "7"
-        End If
-        If LineItems(i) = "47" Then
-            row = "5"
-            column = "8"
-        End If
-        If LineItems(i) = "48" Then
-            row = "5"
-            column = "9"
-        End If
-        If LineItems(i) = "49" Then
-            row = "5"
-            column = "10"
-        End If
-        If LineItems(1) = finalString Then
-             xSheet.getCellByPosition(row, column).string = LineItems(2)
-
-        End If
-
-    Loop
-
-
-End Sub
