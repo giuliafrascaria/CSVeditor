@@ -50,15 +50,18 @@ with open('singleline.csv', 'r') as fdin, open('out.csv', 'wt') as fdout:
 
 os.remove("singleline.csv")
 
+
 source = open('out.csv')
 result = open('result.csv', 'wt')
+
 
 try:
     rdr = csv.reader(source)
     wtr = csv.writer(result)
     for r in rdr:
         mylist = r[4].split(" ")
-        print("giorno " + mylist[0] + " ora di inizio " + mylist[1])
+        durata = r[6].split(" ")
+        print("giorno " + mylist[0] + " ora di inizio " + mylist[1] + " durata " + durata[0])
         d = datetime.datetime.strptime(mylist[0], '%d/%m/%Y').strftime('%a')
         print(d)
         i = 0
@@ -93,6 +96,11 @@ try:
         if d == "Fri":
             i += 40
         wtr.writerow((i, r[1], r[2], r[3], r[10], r[11]))
+
+        if durata[0] == "2":
+            #devo dividere lo slot in due righe csv
+            print("devo aggiungere una row perche durava due ore")
+            wtr.writerow((i+1, r[1], r[2], r[3], r[10], r[11]))
 finally:
     source.close()
     result.close()
