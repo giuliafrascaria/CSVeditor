@@ -101,6 +101,9 @@ try:
             #devo dividere lo slot in due righe csv
             print("devo aggiungere una row perche durava due ore")
             wtr.writerow((i+1, r[1], r[2], r[3], r[10], r[11]))
+        elif len(durata) == 4:
+            print("devo aggiungere una row perche durava una e 45")
+            wtr.writerow((i + 1, r[1], r[2], r[3], r[10], r[11]))
 finally:
     source.close()
     result.close()
@@ -114,4 +117,4 @@ finally:
 #         # and write
 #         csv.writer(fdout).writerow(line)
 
-os.remove("out.csv")
+#os.remove("out.csv")
