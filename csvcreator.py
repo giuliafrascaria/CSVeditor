@@ -1,6 +1,7 @@
 import csv
 import datetime
 import os
+import re
 
 generalCSV = open('reservations.csv')
 singlelineCSV = open('singleline.csv', 'wt')
@@ -107,6 +108,24 @@ try:
 finally:
     source.close()
     result.close()
+
+
+source = open('result.csv')
+result = open('result2.csv', 'wt')
+
+
+try:
+    rdr = csv.reader(source)
+    wtr = csv.writer(result)
+    for r in rdr:
+        courselist = re.split(' ano| anno| year', r[4])
+        courselist.pop(-1)
+
+        print(courselist)
+finally:
+    source.close()
+    result.close()
+
 
 # with open('result.csv', 'r') as fdin, open('final.csv', 'wt') as fdout:
 #     for line in csv.reader(fdin):
