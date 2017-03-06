@@ -117,6 +117,7 @@ end sub
 sub example_macro
 rem ----------------------------------------------------------------------
 
+	call deleterAll
 	call deleter
 	call test
 
@@ -1131,3 +1132,351 @@ dispatcher.executeDispatch(document, ".uno:SetBorderStyle", "", 0, args2())
 
 
 end sub
+
+
+sub deleterAll
+rem ----------------------------------------------------------------------
+rem define variables
+dim document   as object
+dim dispatcher as object
+rem ----------------------------------------------------------------------
+rem get access to the document
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+
+rem ----------------------------------------------------------------------
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = "ToPoint"
+args1(0).Value = "$A$1:$J$43"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args1())
+
+rem ----------------------------------------------------------------------
+dim args2(0) as new com.sun.star.beans.PropertyValue
+args2(0).Name = "Flags"
+args2(0).Value = "A"
+
+dispatcher.executeDispatch(document, ".uno:Delete", "", 0, args2())
+
+rem ----------------------------------------------------------------------
+dim args3(0) as new com.sun.star.beans.PropertyValue
+args3(0).Name = "ToPoint"
+args3(0).Value = "$E$8"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args3())
+end sub
+
+
+
+
+sub forCorso
+
+	call deleterAll
+	call deleter
+	call test
+	call minitable
+	call minitableBorder
+
+
+
+
+    dim preamble as String
+    dim myValue as String
+    dim finalString as String
+    myValue = InputBox("Inserisci codice corso di studi", "Corso di studi", "A1")
+    preamble = "Ing-Aula "
+    finalString = preamble & myValue
+
+    rem define variables
+    dim document   as object
+    dim dispatcher as object
+    xSheet = ThisComponent.Sheets(0)
+    document   = ThisComponent.CurrentController.Frame
+    dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+    FilePath = "/home/dandi/PycharmProjects/CSVeditor/result.csv"
+    Open FilePath For Input As #1
+    Open FilePath For Input As #2
+
+rem ----------------------------------------------------------------------
+
+    Dim column as integer
+    Dim row As integer
+
+rem ----------------------------------------------------------------------
+
+    Dim i As Integer
+    i = 0
+    Dim valueToCheck As Integer
+
+
+    Do Until EOF(1)
+
+
+        Line Input #1, LineFromFile
+        LineItems = Split(LineFromFile, ",")
+        If LineItems(i) = "0" Then
+            row = "1"
+            column = "1"
+        End If
+        If LineItems(i) = "1" Then
+            row = "1"
+            column = "2"
+        End If
+        If LineItems(i) = "2" Then
+            row = "1"
+            column = "3"
+        End If
+        If LineItems(i) = "3" Then
+            row = "1"
+            column = "4"
+        End If
+        If LineItems(i) = "4" Then
+            row = "1"
+            column = "5"
+        End If
+        If LineItems(i) = "5" Then
+            row = "1"
+            column = "6"
+        End If
+        If LineItems(i) = "6" Then
+            row = "1"
+            column = "7"
+        End If
+        If LineItems(i) = "7" Then
+            row = "1"
+            column = "8"
+        End If
+        If LineItems(i) = "8" Then
+            row = "1"
+            column = "9"
+        End If
+        If LineItems(i) = "9" Then
+            row = "1"
+            column = "10"
+        End If
+
+
+
+        If LineItems(i) = "10" Then
+            row = "2"
+            column = "1"
+        End If
+        If LineItems(i) = "11" Then
+            row = "2"
+            column = "2"
+        End If
+        If LineItems(i) = "12" Then
+            row = "2"
+            column = "3"
+        End If
+        If LineItems(i) = "13" Then
+            row = "2"
+            column = "4"
+        End If
+        If LineItems(i) = "14" Then
+            row = "2"
+            column = "5"
+        End If
+        If LineItems(i) = "15" Then
+            row = "2"
+            column = "6"
+        End If
+        If LineItems(i) = "16" Then
+            row = "2"
+            column = "7"
+        End If
+        If LineItems(i) = "17" Then
+            row = "2"
+            column = "8"
+        End If
+        If LineItems(i) = "18" Then
+            row = "2"
+            column = "9"
+        End If
+        If LineItems(i) = "19" Then
+            row = "2"
+            column = "10"
+        End If
+
+
+
+        If LineItems(i) = "20" Then
+            row = "3"
+            column = "1"
+        End If
+        If LineItems(i) = "21" Then
+            row = "3"
+            column = "2"
+        End If
+        If LineItems(i) = "22" Then
+            row = "3"
+            column = "3"
+        End If
+        If LineItems(i) = "23" Then
+            row = "3"
+            column = "4"
+        End If
+        If LineItems(i) = "24" Then
+            row = "3"
+            column = "5"
+        End If
+        If LineItems(i) = "25" Then
+            row = "3"
+            column = "6"
+        End If
+        If LineItems(i) = "26" Then
+            row = "3"
+            column = "7"
+        End If
+        If LineItems(i) = "27" Then
+            row = "3"
+            column = "8"
+        End If
+        If LineItems(i) = "28" Then
+            row = "3"
+            column = "9"
+        End If
+        If LineItems(i) = "29" Then
+            row = "3"
+            column = "10"
+        End If
+
+
+
+        If LineItems(i) = "30" Then
+            row = "4"
+            column = "1"
+        End If
+        If LineItems(i) = "31" Then
+            row = "4"
+            column = "2"
+        End If
+        If LineItems(i) = "32" Then
+            row = "4"
+            column = "3"
+        End If
+        If LineItems(i) = "33" Then
+            row = "4"
+            column = "4"
+        End If
+        If LineItems(i) = "34" Then
+            row = "4"
+            column = "5"
+        End If
+        If LineItems(i) = "35" Then
+            row = "4"
+            column = "6"
+        End If
+        If LineItems(i) = "36" Then
+            row = "4"
+            column = "7"
+        End If
+        If LineItems(i) = "37" Then
+            row = "4"
+            column = "8"
+        End If
+        If LineItems(i) = "38" Then
+            row = "4"
+            column = "9"
+        End If
+        If LineItems(i) = "39" Then
+            row = "4"
+            column = "10"
+        End If
+
+
+
+
+        If LineItems(i) = "40" Then
+            row = "5"
+            column = "1"
+        End If
+        If LineItems(i) = "41" Then
+            row = "5"
+            column = "2"
+        End If
+        If LineItems(i) = "42" Then
+            row = "5"
+            column = "3"
+        End If
+        If LineItems(i) = "43" Then
+            row = "5"
+            column = "4"
+        End If
+        If LineItems(i) = "44" Then
+            row = "5"
+            column = "5"
+        End If
+        If LineItems(i) = "45" Then
+            row = "5"
+            column = "6"
+        End If
+        If LineItems(i) = "46" Then
+            row = "5"
+            column = "7"
+        End If
+        If LineItems(i) = "47" Then
+            row = "5"
+            column = "8"
+        End If
+        If LineItems(i) = "48" Then
+            row = "5"
+            column = "9"
+        End If
+        If LineItems(i) = "49" Then
+            row = "5"
+            column = "10"
+        End If
+        valueToCheck = InStr(LineItems(5), corsoDaCercare)
+        If valueToCheck <> 0 Then
+        	xSheet.getCellByPosition(row, column).string = LineItems(2)
+        End If
+    Loop
+
+
+
+    Dim j As Integer
+    j = 0
+	Dim forCycle As Integer
+	dim materia As String
+	Dim check As Integer
+	check = 0
+
+
+    Do Until EOF(2)
+
+        Line Input #2, LineFromFile
+        LineItems = Split(LineFromFile, ",")
+		valueToCheck = InStr(LineItems(5), corsoDaCercare)
+        If valueToCheck <> 0 Then
+			If materia <> LineItems(2) Then
+				For forCycle = 0 To j
+	        		If LineItems(2) = xSheet.getCellByPosition(1, 15 + forCycle).string Then
+	        			check = 1
+	        		End If
+	        	Next forCycle
+	        	If check <> 1 Then
+	        	xSheet.getCellByPosition(1, 15 + j).string = LineItems(2)
+	        	xSheet.getCellByPosition(2, 15 + j).string = LineItems(3)
+	        	xSheet.getCellByPosition(3, 15 + j).string = LineItems(5)
+	        	j = j+1
+	        	materia = LineItems(2)
+	        	End If
+				check = 0
+        	End If
+		End If
+
+    Loop
+
+
+
+
+end sub
+
+
+
+
+
+
+
+
