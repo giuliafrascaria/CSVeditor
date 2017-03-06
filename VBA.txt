@@ -1,5 +1,3 @@
-Option VBASupport 1
-
 Sub csvReader()
 
     dim preamble as String
@@ -50,14 +48,14 @@ end sub
 
 sub degreechooser
  Dim s As String
- s = InputBox("Scegli il corso di laurea " & Chr(13) & _
-     vbCrLf & vbTab & "1 - Ingegneria Informatica" & Chr(13)  & _
-     vbCrLf & vbTab & "2 - Ingegneria Gestionale" & Chr(13) & _
-     vbCrLf & vbTab & "3 - Ingegneria Edile" & Chr(13) & Chr(10) & _
-     vbCrLf & vbTab & "4 - Ingegneria Di internet" & Chr(13) & Chr(10) & _
-     vbCrLf & vbTab & "5 - Ingegneria dell'edilizia" & Chr(13) & Chr(10) & _
-     vbCrLf & vbTab & "6 - Ingegneria Elettronica" & Chr(13) & Chr(10) & _
-     vbCrLf & vbTab & "7 - Ingegneria di semone", "Option Chooser")
+ s = InputBox("Scegli il corso di laurea "	 & Chr(13) & _
+         Chr(13) & "1 - Ingegneria Informatica" & _
+         Chr(13) & "2 - Ingegneria Gestionale" & _
+         Chr(13) & "3 - Ingegneria Edile" & _
+         Chr(13) & "4 - Ingegneria Di internet" & _
+         Chr(13) & "5 - Ingegneria dell'edilizia" & _
+         Chr(13) & "6 - Ingegneria Elettronica"	 & _
+         Chr(13) & "7 - Ingegneria di semone", "Option Chooser")
  Select Case s
      Case "1"
          FolderChooser = "C:\Folder1"
@@ -382,22 +380,31 @@ rem ----------------------------------------------------------------------
 
     Dim j As Integer
     j = 0
+	Dim forCycle As Integer
+	dim materia As String
+	Dim check As Integer
+	check = 0
 
-	dim materia as String
-	materia = "vuoto"
 
     Do Until EOF(2)
-
 
         Line Input #2, LineFromFile
         LineItems = Split(LineFromFile, ",")
 		If LineItems(1) = finalString Then
 			If materia <> LineItems(2) Then
+				For forCycle = 0 To j
+	        		If LineItems(2) = xSheet.getCellByPosition(1, 15 + forCycle).string Then
+	        			check = 1
+	        		End If
+	        	Next forCycle
+	        	If check <> 1 Then
 	        	xSheet.getCellByPosition(1, 15 + j).string = LineItems(2)
 	        	xSheet.getCellByPosition(2, 15 + j).string = LineItems(3)
 	        	xSheet.getCellByPosition(3, 15 + j).string = LineItems(5)
 	        	j = j+1
 	        	materia = LineItems(2)
+	        	End If
+				check = 0
         	End If
 		End If
 
