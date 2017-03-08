@@ -122,6 +122,54 @@ try:
         courselist.pop(-1)
 
         print(courselist)
+        codeCell = ""
+
+        for x in courselist:
+            coursecode = ""
+            if "gestionale" in x:
+                coursecode += "01"
+            elif "energetica" in x:
+                coursecode += "02"
+            elif "meccanica" in x:
+                coursecode += "03"
+            elif "medica" in x:
+                coursecode += "04"
+            elif "civile e ambientale" in x:
+                coursecode += "05"
+            elif "sciences" in x:
+                coursecode += "06"
+            elif "edilizia" in x:
+                coursecode += "07"
+            elif "architettura" in x:
+                coursecode += "08"
+            elif "elettronica" in x:
+                coursecode += "09"
+            elif "di internet" in x:
+                coursecode += "10"
+            elif "informatica" in x:
+                coursecode += "11"
+            elif "ICT" in x:
+                coursecode += "23"
+            elif "automazione" in x:
+                coursecode += "13"
+            elif "civile" in x:
+                coursecode += "14"
+                #anno di corso
+            if "magistrale I" in x:
+                coursecode += "4"
+            elif "magistrale II" in x:
+                coursecode += "5"
+            elif "III" in x:
+                coursecode += "3"
+            elif "II" in x:
+                coursecode += "2"
+            elif "I" in x:
+                coursecode += "1"
+
+            codeCell = codeCell + coursecode + " "
+
+        wtr.writerow((r[0], r[1], r[2], r[3], r[4], r[5], codeCell))
+
 finally:
     source.close()
     result.close()
