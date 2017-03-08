@@ -154,6 +154,10 @@ try:
                 coursecode += "13"
             elif "civile" in x:
                 coursecode += "14"
+            elif "tecniche" in x:
+                coursecode += "15"
+            elif "territorio" in x:
+                coursecode += "16"
                 #anno di corso
             if "magistrale I" in x:
                 coursecode += "4"
