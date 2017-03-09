@@ -1184,7 +1184,7 @@ sub forCorso
 
 
     valore = InputBox("Inserisci codice corso di studi", "Corso di studi", "1")
-
+    If valore <> "" Then
 
     rem define variables
     dim document   as object
@@ -1466,6 +1466,8 @@ rem ----------------------------------------------------------------------
 		End If
 
     Loop
+
+    End If
 
 
 
