@@ -117,7 +117,7 @@ end sub
 sub example_macro
 rem ----------------------------------------------------------------------
 
-	call deleterAll
+	call final_delete
 	call deleter
 	call test
 
@@ -1171,7 +1171,7 @@ end sub
 
 sub forCorso
 
-	call deleterAll
+	call final_delete
 	call deleter
 	call test
 	call minitable
@@ -1185,6 +1185,7 @@ sub forCorso
 
     valore = InputBox("Inserisci codice corso di studi", "Corso di studi", "1")
     If valore <> "" Then
+
 
     rem define variables
     dim document   as object
@@ -1481,3 +1482,30 @@ end sub
 
 
 
+
+sub final_delete
+rem ----------------------------------------------------------------------
+rem define variables
+dim document   as object
+dim dispatcher as object
+rem ----------------------------------------------------------------------
+rem get access to the document
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+
+rem ----------------------------------------------------------------------
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = "ToPoint"
+args1(0).Value = "$A$1:$F$198"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args1())
+
+rem ----------------------------------------------------------------------
+dim args2(0) as new com.sun.star.beans.PropertyValue
+args2(0).Name = "Flags"
+args2(0).Value = "A"
+
+dispatcher.executeDispatch(document, ".uno:Delete", "", 0, args2())
+
+
+end sub
