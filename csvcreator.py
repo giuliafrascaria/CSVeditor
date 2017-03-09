@@ -78,6 +78,8 @@ try:
             i = 4
         if mylist[1] == "13:15":
             i = 5
+        if mylist[1] == "13:00":
+            i = 5
         if mylist[1] == "14:00":
             i = 6
         if mylist[1] == "15:00":
