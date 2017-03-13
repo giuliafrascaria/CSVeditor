@@ -1082,6 +1082,79 @@ dispatcher.executeDispatch(document, ".uno:JumpToNextCell", "", 0, Array())
 end sub
 
 
+
+sub minitable_corso
+rem ----------------------------------------------------------------------
+rem define variables
+dim document   as object
+dim dispatcher as object
+rem ----------------------------------------------------------------------
+rem get access to the document
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+
+rem ----------------------------------------------------------------------
+dim args51(0) as new com.sun.star.beans.PropertyValue
+args51(0).Name = "ToPoint"
+args51(0).Value = "$A$14"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args51())
+
+dim args24(0) as new com.sun.star.beans.PropertyValue
+args24(0).Name = "StringName"
+args24(0).Value = "Aula"
+
+dispatcher.executeDispatch(document, ".uno:EnterString", "", 0, args24())
+
+rem ----------------------------------------------------------------------
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = "ToPoint"
+args1(0).Value = "$B$14"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args1())
+
+rem ----------------------------------------------------------------------
+dim args2(0) as new com.sun.star.beans.PropertyValue
+args2(0).Name = "StringName"
+args2(0).Value = "Sigla"
+
+dispatcher.executeDispatch(document, ".uno:EnterString", "", 0, args2())
+
+dim args20(0) as new com.sun.star.beans.PropertyValue
+args20(0).Name = "ToPoint"
+args20(0).Value = "$C$14"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args20())
+
+rem ----------------------------------------------------------------------
+dim args3(0) as new com.sun.star.beans.PropertyValue
+args3(0).Name = "StringName"
+args3(0).Value = "Nome"
+
+dispatcher.executeDispatch(document, ".uno:EnterString", "", 0, args3())
+
+dim args21(0) as new com.sun.star.beans.PropertyValue
+args21(0).Name = "ToPoint"
+args21(0).Value = "$D$14"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args21())
+
+rem ----------------------------------------------------------------------
+dim args4(0) as new com.sun.star.beans.PropertyValue
+args4(0).Name = "StringName"
+args4(0).Value = "Docente"
+
+dispatcher.executeDispatch(document, ".uno:EnterString", "", 0, args4())
+
+
+rem ----------------------------------------------------------------------
+dispatcher.executeDispatch(document, ".uno:JumpToNextCell", "", 0, Array())
+
+
+end sub
+
+
+
 sub minitableBorder
 rem ----------------------------------------------------------------------
 rem define variables
@@ -1134,6 +1207,57 @@ dispatcher.executeDispatch(document, ".uno:SetBorderStyle", "", 0, args2())
 end sub
 
 
+sub minitableBorder_corso
+rem ----------------------------------------------------------------------
+rem define variables
+dim document   as object
+dim dispatcher as object
+rem ----------------------------------------------------------------------
+rem get access to the document
+document   = ThisComponent.CurrentController.Frame
+dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+
+rem ----------------------------------------------------------------------
+dim args1(0) as new com.sun.star.beans.PropertyValue
+args1(0).Name = "ToPoint"
+args1(0).Value = "$A$14:$D$14"
+
+dispatcher.executeDispatch(document, ".uno:GoToCell", "", 0, args1())
+
+rem ----------------------------------------------------------------------
+dim args2(12) as new com.sun.star.beans.PropertyValue
+args2(0).Name = "OuterBorder.LeftBorder"
+args2(0).Value = Array(0,0,2,0,0,2)
+args2(1).Name = "OuterBorder.LeftDistance"
+args2(1).Value = 0
+args2(2).Name = "OuterBorder.RightBorder"
+args2(2).Value = Array(0,0,2,0,0,2)
+args2(3).Name = "OuterBorder.RightDistance"
+args2(3).Value = 0
+args2(4).Name = "OuterBorder.TopBorder"
+args2(4).Value = Array(0,0,2,0,0,2)
+args2(5).Name = "OuterBorder.TopDistance"
+args2(5).Value = 0
+args2(6).Name = "OuterBorder.BottomBorder"
+args2(6).Value = Array(0,0,2,0,0,2)
+args2(7).Name = "OuterBorder.BottomDistance"
+args2(7).Value = 0
+args2(8).Name = "InnerBorder.Horizontal"
+args2(8).Value = Array(0,0,2,0,0,2)
+args2(9).Name = "InnerBorder.Vertical"
+args2(9).Value = Array(0,0,2,0,0,2)
+args2(10).Name = "InnerBorder.Flags"
+args2(10).Value = 0
+args2(11).Name = "InnerBorder.ValidFlags"
+args2(11).Value = 127
+args2(12).Name = "InnerBorder.DefaultDistance"
+args2(12).Value = 0
+
+dispatcher.executeDispatch(document, ".uno:SetBorderStyle", "", 0, args2())
+
+
+end sub
+
 sub deleterAll
 rem ----------------------------------------------------------------------
 rem define variables
@@ -1174,8 +1298,8 @@ sub forCorso
 	call final_delete
 	call deleter
 	call test
-	call minitable
-	call minitableBorder
+	call minitable_corso
+	call minitableBorder_corso
 
 
     dim preamble as String
@@ -1456,6 +1580,7 @@ rem ----------------------------------------------------------------------
 	        		End If
 	        	Next forCycle
 	        	If check <> 1 Then
+	        	xSheet.getCellByPosition(0, 15 + j).string = LineItems(1)
 	        	xSheet.getCellByPosition(1, 15 + j).string = LineItems(2)
 	        	xSheet.getCellByPosition(2, 15 + j).string = LineItems(3)
 	        	xSheet.getCellByPosition(3, 15 + j).string = LineItems(5)
