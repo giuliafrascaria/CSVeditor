@@ -3,8 +3,12 @@ import datetime
 import os
 import re
 
-generalCSV = open('reservations.csv')
-singlelineCSV = open('singleline.csv', 'wt')
+
+#-------------------elaborazione 1, comprimo le righe del csv per avere una sola riga per ogni entry----------------------
+
+
+generalCSV = open('reservations.csv')   #input file, scaricato dalla piattaforma online
+singlelineCSV = open('singleline.csv', 'wt')    #output file per la prima rielaborazione
 
 try:
 
@@ -19,24 +23,22 @@ try:
             prevrow = dataList[i - j]
             smallrow = dataList[i]
             if len(smallrow) == 1:
-                #fila contenente solo una materia, la aggiungo all'ultima cella
+                #fila contenente solo una materia, la aggiungo all'ultima cella della riga precedente e lascio vuota la cella del professore
                 prevrow[-1] = prevrow[-1] + " " + smallrow[0]
             else:
-                #fila contenente una materia e un professore
+                #fila contenente una materia e un professore, aggiungo la materia all'ultima cella della riga precedente e aggiungo la cella
+                #con il nome del professore
                 prevrow[-1] = prevrow[-1] + " " + smallrow[0]
                 professor = smallrow[1]
                 print(professor)
                 prevrow.append(professor)
-            print("riga corta, metto nella riga precedente")
-            #vado avanti di una riga iterando il ciclo for
-            j += 1  #ma mi segno che devo incollare tutto una riga piu indietro
+                    #vado avanti di una riga iterando il ciclo for
+            j += 1  #ma aggiorno l'offset della riga in cui incollare tutto
         else:
-            csvWriter.writerow(dataList[i - j])
+            csvWriter.writerow(dataList[i - j]) #riga completa, la trasferisco così nel file di output
             print("riga lunga, scrivo")
             j = 1
-            #print(row)
-            #copio la riga nel csv corretto
-            #print("row normale")
+
 finally:
     generalCSV.close()
 
@@ -48,20 +50,22 @@ with open('singleline.csv', 'r') as fdin, open('out.csv', 'wt') as fdout:
             line.insert(11, '')
         # and write
         csv.writer(fdout).writerow(line)
+    fdin.close()
+    fdout.close()
 
-os.remove("singleline.csv")
 
 
 source = open('out.csv')
 result = open('result.csv', 'wt')
 
 
+#-------------------elaborazione 2, elaboro il file assegnando a ogni slot orario un numero----------------------
 try:
     rdr = csv.reader(source)
     wtr = csv.writer(result)
     for r in rdr:
-        mylist = r[4].split(" ")
-        durata = r[6].split(" ")
+        mylist = r[4].split(" ")    #cella contenente il giorno e l'ora di inizio
+        durata = r[6].split(" ")    #cella contenente la durata della lezione
         print("giorno " + mylist[0] + " ora di inizio " + mylist[1] + " durata " + durata[0])
         d = datetime.datetime.strptime(mylist[0], '%d/%m/%Y').strftime('%a')
         print(d)
@@ -100,16 +104,18 @@ try:
             i += 40
         wtr.writerow((i, r[1], r[2], r[3], r[10], r[11]))
 
-        if durata[0] == "2":
-            #devo dividere lo slot in due righe csv
-            print("devo aggiungere una row perche durava due ore")
+        if durata[0] == "2":    #durate fuori standard, 2 ore
             wtr.writerow((i+1, r[1], r[2], r[3], r[10], r[11]))
-        elif len(durata) == 4:
-            print("devo aggiungere una row perche durava una e 45")
+        elif len(durata) == 4:      #durate fuori standard, un'ora e 45
             wtr.writerow((i + 1, r[1], r[2], r[3], r[10], r[11]))
 finally:
     source.close()
     result.close()
+
+
+
+#-------------------elaborazione 3, elaboro il file assegnando a ogni corso di laurea un codice----------------------
+
 
 
 source = open('result.csv')
@@ -190,6 +196,10 @@ finally:
 #         # and write
 #         csv.writer(fdout).writerow(line)
 #os.remove("out.csv")
+
+
+#-------------------può tornare utile per resistere a errori di ortografia nel csv----------------------
+
 
 def levenshtein_distance(s1, s2):
     if len(s1) > len(s2):
