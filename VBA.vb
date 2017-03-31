@@ -81,14 +81,14 @@ end sub
 
 
 
-
+'----------------------------------------MACRO CHIAMATA PER LA RICERCA PER AULA------------------------------------
 
 sub example_macro
-rem ----------------------------------------------------------------------
 
-	call final_delete
-	call deleter
-	call test
+	call final_delete	'cancellazione delle tabelle precedentemente create
+	call deleter		'cancellazione del contenuto della tabella
+	call test			'riempimento della nuova tabella con i campi delle ore e dei giorni
+
 
 
     dim preamble as String
