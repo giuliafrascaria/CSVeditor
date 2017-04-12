@@ -187,6 +187,10 @@ finally:
     result.close()
 
 
+
+
+
+
 # with open('result.csv', 'r') as fdin, open('final.csv', 'wt') as fdout:
 #     for line in csv.reader(fdin):
 #         # insert into each row by
